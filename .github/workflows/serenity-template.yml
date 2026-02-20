@@ -160,7 +160,13 @@ jobs:
       - name: Create Serenity Rootfs
         if: ${{ inputs.debug_options == 'NORMAL_DEBUG' }}
         working-directory: ${{ steps.build-parameters.outputs.build_directory }}
-        run: ninja install && ninja qemu-image && ninja grub-uefi-image
+        run: ninja install && ninja qemu-image
+
+      - name: Build GRUB image (x86_64)
+        if: ${{ inputs.arch == 'x86_64' && inputs.debug_options == 'NORMAL_DEBUG' }}
+        working-directory: ${{ steps.build-parameters.outputs.build_directory }}
+        run: ninja grub-uefi-image
+        
 
       - name: Run On-Target Tests
         if: ${{ inputs.debug_options == 'NORMAL_DEBUG' }}
@@ -223,14 +229,16 @@ jobs:
       # Upload QEMU and GRUB EFI images
 
       - name: Upload QEMU image
+        if: ${{ inputs.debug_options == 'NORMAL_DEBUG' }}
         uses: actions/upload-artifact@v5
         with:
           name: serenity-build-qemu-${{ inputs.arch }}
           path: ${{ steps.build-parameters.outputs.build_directory }}/_disk_image
 
       - name: Upload GRUB image
+        if: ${{ inputs.debug_options == 'NORMAL_DEBUG' }}
         uses: actions/upload-artifact@v5
         with:
-          name: serenity-build-grub-${{ inputs.arch }}
+          name: serenity-build-grub-x86_64
           path: ${{ steps.build-parameters.outputs.build_directory }}/grub_uefi_disk_image
       
