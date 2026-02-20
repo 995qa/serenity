@@ -216,17 +216,21 @@ jobs:
           path: ${{ steps.build-parameters.outputs.build_directory }}/reports
           retention-days: 90
 
+      - name: List files in build dir (DEBUG)
+        working-directory: ${{ steps.build-parameters.outputs.build_directory }}
+        run: ls -f
+
       # Upload QEMU and GRUB EFI images
 
       - name: Upload QEMU image
         uses: actions/upload-artifact@v5
         with:
-          name: serenity-build-qemu
+          name: serenity-build-qemu-${{ inputs.arch }}
           path: ${{ steps.build-parameters.outputs.build_directory }}/_disk_image
 
       - name: Upload GRUB image
         uses: actions/upload-artifact@v5
         with:
-          name: serenity-build-qemu
+          name: serenity-build-grub-${{ inputs.arch }}
           path: ${{ steps.build-parameters.outputs.build_directory }}/grub_uefi_disk_image
       
