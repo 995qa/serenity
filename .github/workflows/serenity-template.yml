@@ -233,7 +233,9 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: serenity-build-qemu-${{ inputs.arch }}-${{ inputs.toolchain }}-${{ github.sha }}
-          path: ${{ steps.build-parameters.outputs.build_directory }}/_disk_image
+          path: |
+            ${{ steps.build-parameters.outputs.build_directory }}/_disk_image
+            ${{ steps.build-parameters.outputs.build_directory }}/Kernel/Kernel
 
       - name: Upload GRUB image
         if: ${{ inputs.debug_options == 'NORMAL_DEBUG' }}
