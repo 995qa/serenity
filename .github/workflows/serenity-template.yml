@@ -232,13 +232,13 @@ jobs:
         if: ${{ inputs.debug_options == 'NORMAL_DEBUG' }}
         uses: actions/upload-artifact@v5
         with:
-          name: serenity-build-qemu-${{ inputs.arch }}
+          name: serenity-build-qemu-${{ inputs.arch }}-${{ inputs.toolchain }}-${{ github.sha }}
           path: ${{ steps.build-parameters.outputs.build_directory }}/_disk_image
 
       - name: Upload GRUB image
         if: ${{ inputs.debug_options == 'NORMAL_DEBUG' }}
         uses: actions/upload-artifact@v5
         with:
-          name: serenity-build-grub-x86_64
+          name: serenity-build-grub-x86_64--${{ inputs.toolchain }}-${{ github.sha }}
           path: ${{ steps.build-parameters.outputs.build_directory }}/grub_uefi_disk_image
       
