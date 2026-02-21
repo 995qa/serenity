@@ -1,3 +1,19 @@
+# CI
+
+This fork adds Artifact images into the CI, allowing users to download the OS without compiling the source code.
+
+This includes disk images for QEMU (x86_64, aarch64, riscv64) and GRUB UEFI (x86_64) and Kernel files alongside the QEMU images for boot.
+
+## Running
+
+For QEMU just clone the repo, add the disk image and Kernel folder into a folder in the repo, and run `../Meta/run.sh` and it should boot just fine.
+
+For other VMs and Bare Metal installations, try using the GRUB images instead. Though they may not boot for your system or VM.
+
+
+
+
+
 # SerenityOS
 
 Graphical Unix-like operating system for 64-bit x86, Arm, and RISC-V computers.
