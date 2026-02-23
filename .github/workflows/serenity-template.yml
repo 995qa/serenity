@@ -236,6 +236,7 @@ jobs:
           path: |
             ${{ steps.build-parameters.outputs.build_directory }}/_disk_image
             ${{ steps.build-parameters.outputs.build_directory }}/Kernel/Kernel
+            ${{ steps.build-parameters.outputs.build_directory }}/Kernel/Kernel.bin
 
       - name: Upload GRUB image
         if: ${{ inputs.debug_options == 'NORMAL_DEBUG' }}
