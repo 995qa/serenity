@@ -167,10 +167,6 @@ jobs:
         working-directory: ${{ steps.build-parameters.outputs.build_directory }}
         run: ninja grub-uefi-image
 
-      - name: Build Limine image (x86_64)
-        if: ${{ inputs.arch == 'x86_64' && inputs.debug_options == 'NORMAL_DEBUG' }}
-        working-directory: ${{ steps.build-parameters.outputs.build_directory }}
-        run: ninja limine-image
         
       - name: Run On-Target Tests
         if: ${{ inputs.debug_options == 'NORMAL_DEBUG' }}
@@ -248,7 +244,4 @@ jobs:
         with:
           name: serenity-build-grub-x86_64-${{ inputs.toolchain }}-${{ github.sha }}
           path: ${{ steps.build-parameters.outputs.build_directory }}/grub_uefi_disk_image
-
-      - name: ls to builddir in tree
-        run: ls ${{ steps.build-parameters.outputs.build_directory }}
       
